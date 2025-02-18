@@ -11,7 +11,7 @@ public class SubscribeAsyncExample {
   public static void main(String... args) throws Exception {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "gca-st-pubsub-0";
-    String subscriptionId = "subscription-010";
+    String subscriptionId = "subscription-007";
 
     subscribeAsyncExample(projectId, subscriptionId);
   }
@@ -36,11 +36,10 @@ public class SubscribeAsyncExample {
       subscriber.startAsync().awaitRunning();
       System.out.printf("Listening for messages on %s:\n", subscriptionName.toString());
       // Allow the subscriber to run for 30s unless an unrecoverable error occurs.
-      subscriber.awaitTerminated(1, TimeUnit.SECONDS);
+      subscriber.awaitTerminated(30, TimeUnit.SECONDS);
     } catch (TimeoutException timeoutException) {
       // Shut down the subscriber after 30s. Stop receiving messages.
       subscriber.stopAsync();
-      System.out.println(timeoutException);
     }
   }
 }
